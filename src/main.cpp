@@ -22,10 +22,10 @@ void setup() {
 
 // short and fast so we dont miss an event
 void loop() {
-  crossing.SetSensor1(analogRead(SENSOR1));
-  crossing.SetSensor2(analogRead(SENSOR2));
-  crossing.SetSensor3(analogRead(SENSOR3));
-  crossing.SetSensor4(analogRead(SENSOR4));
+  crossing.sensorsTrack1.SetSensor1(analogRead(SENSOR1));
+  crossing.sensorsTrack1.SetSensor2(analogRead(SENSOR2));
+  crossing.sensorsTrack2.SetSensor1(analogRead(SENSOR3));
+  crossing.sensorsTrack2.SetSensor2(analogRead(SENSOR4));
 
   // sensor states
   crossing.CheckInSensors();

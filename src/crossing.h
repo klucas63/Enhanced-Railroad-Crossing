@@ -5,26 +5,28 @@
 #include <Servo.h>
 #include <LiquidCrystal_I2C.h>
 #include "config.h"
-#include "timers.h"
+#include "tracktimer.h"
+#include "armtimer.h"
 #include "display.h"
 #include "crossingarm.h"
+#include "sensors.h"
 
 class Crossing
 {
 private:
     CrossingArm crossingArm;
-    Timers timers; // all timing
+    TrackTimer trackTimer1; // track 1 timing
+    TrackTimer trackTimer2; // track 2 timing
+    ArmTimer armTimer; // arm timing
     Display *display; // display pointer
-
-    int sensor1; // pin inputs
-    int sensor2;
-    int sensor3;
-    int sensor4;
 
 public:
     Crossing();
     ~Crossing();
     
+    Sensors sensorsTrack1;
+    Sensors sensorsTrack2;
+
     LiquidCrystal_I2C *lcd; // pointer of lcd hangs program
 
     CROSSINGSTATES trackState1 = ST_OFF; // default state of the crossing train 1
@@ -34,26 +36,12 @@ public:
 
     void ArmDown();    
     void ArmUp();
-    void WaitForTrain1();
-    void WaitForTrain2();
-    void WaitForTrain1Exit();
-    void WaitForTrain2Exit();
-    void TrainInSensor1();
-    void TrainInSensor2();
-    void TrainInSensor3();
-    void TrainInSensor4();
-    void TrainOutSensor1();
-    void TrainOutSensor2();
-    void TrainOutSensor3();
-    void TrainOutSensor4();
+    void WaitForTrain(int);
+    void WaitForTrainExit(CROSSINGSTATES, int);
     void CheckInSensors();
     void CheckOutSensors();
     void CheckArmUp();
     void CheckArmDown();
     void Init();
-    void SetSensor1(int);
-    void SetSensor2(int);
-    void SetSensor3(int);
-    void SetSensor4(int);
 };
 #endif

@@ -53,7 +53,7 @@ These are just what I used. You can substitute as you see fit, just change the c
 - Event driven so we dont miss anything
 - 2 tracks
 - Either track either direction
-- Trains can enter and leave at differnt times and speeds
+- Trains can enter and leave at different times and speeds
 - Short or long trains
 - Either train can stop and back out
 
