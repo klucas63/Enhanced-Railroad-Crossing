@@ -1,4 +1,4 @@
-# Enhanced Railroad Crossing #
+# Arduino Enhanced Railroad Crossing #
 ***DRAFT***
 There are many example sketches on the internet for railroad crossings. However most of the ones I found did not support more than one track. I am also new to Arduino so be kind, I may miss something. If you like this concept feel free to use this code. I however am doing this for free/fun so no warranty is implied. Use at your own risk.
 
