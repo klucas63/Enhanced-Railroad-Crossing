@@ -2,7 +2,6 @@
 #include "config.h"
 #include "crossing.h"
 #include "tracktimer.h"
-#include "armtimer.h"
 #include "display.h"
 
 Crossing::Crossing()
@@ -29,7 +28,7 @@ void Crossing::Init() {
 void Crossing::WaitForTrain(int train) {
     display->DisplayMessage(F("Down"), 0, train);
     armState = ST_DOWN; // put the arm down train 1
-    armTimer.StartArmTimeIn(); // start arm timer
+    crossingArm.armTimer.StartArmTimeIn(); // start arm timer
 };
 
 // wait for train to exit track
@@ -54,9 +53,6 @@ void Crossing::WaitForTrainExit(CROSSINGSTATES trackState, int train) {
 // move arm for arm down in loop
 void Crossing::ArmDown() {
     crossingArm.ArmDown(); // servo logic
-    if (crossingArm.GetArmPosition() < MAXARM ) {
-        armTimer.StartArmTimeIn();
-    }
 
     if (crossingArm.GetArmPosition() == MAXARM) {
         Serial.println("stop"); // arm is all the way down
@@ -139,14 +135,14 @@ void Crossing::CheckOutSensors() {
 
 // check for arm up in mail loop
 void Crossing::CheckArmUp() {
-    if (armState == ST_UP && armTimer.CheckArmTime()) {
+    if (armState == ST_UP && crossingArm.armTimer.CheckArmTime()) {
         ArmUp();
     }
 };
 
 // check for arm down in main loop
 void Crossing::CheckArmDown() {
-    if (armState == ST_DOWN && armTimer.CheckArmTime()) {
+    if (armState == ST_DOWN && crossingArm.armTimer.CheckArmTime()) {
         ArmDown();
     }
 };

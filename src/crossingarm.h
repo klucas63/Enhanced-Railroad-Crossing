@@ -2,22 +2,25 @@
 #define CROSSINGARM_H
 #include <Arduino.h>
 #include <Servo.h>
+#include "armtimer.h"
 
 class CrossingArm 
 {
-    private:
-        Servo servo;
-        int pos;
-        bool bellOn;
+private:
+    Servo servo;
+    int pos;
+    bool bellOn;
 
-    public:
-        CrossingArm();
-        ~CrossingArm();
+public:
+    ArmTimer armTimer; // arm timing
 
-        void ArmUp();
-        void ArmDown();
-        void Init();
-        int GetArmPosition();
+    CrossingArm();
+    ~CrossingArm();
+
+    void ArmUp();
+    void ArmDown();
+    void Init();
+    int GetArmPosition();
 };
 
 #endif

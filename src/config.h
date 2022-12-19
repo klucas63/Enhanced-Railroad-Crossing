@@ -21,6 +21,7 @@
 #define BELLVOLUME 3 // midi volume
 #define ACTIVESENSOR 500 // threshold value for sensor in loop
 #define RESETSENSOR 1000 // used in loop to reset
+#define ARMDELAY 3000 // delay after lights flash for arm down
 
 enum CROSSINGSTATES
 {

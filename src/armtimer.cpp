@@ -22,6 +22,21 @@ bool ArmTimer::CheckArmTime() {
     return bRetVal;
 };
 
+bool ArmTimer::ArmDelay() {
+    unsigned long current_ms = millis();
+    bool bReturn = false;
+
+    if (lastCheckArm_ms == 0) {
+        lastCheckArm_ms = current_ms;
+    }
+
+    if ((current_ms > lastCheckArm_ms + ARMDELAY)) {
+        bReturn = true;
+    }
+
+    return bReturn;
+};
+
 void ArmTimer::StartArmTimeIn() {
     arm_ms = millis();
 };

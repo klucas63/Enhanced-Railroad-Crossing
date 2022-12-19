@@ -17,7 +17,6 @@ private:
     CrossingArm crossingArm;
     TrackTimer trackTimer1; // track 1 timing
     TrackTimer trackTimer2; // track 2 timing
-    ArmTimer armTimer; // arm timing
     Display *display; // display pointer
 
 public:

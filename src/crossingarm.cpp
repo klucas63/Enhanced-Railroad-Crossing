@@ -18,7 +18,6 @@ void CrossingArm::Init() {
     servo.attach(SERVO1PIN);
     servo.write(MINARM); // default arm up
     pos = MINARM;
-    bellOn = false; // default bell off
 
     bellSerial.begin(9600); // sound comm
 
@@ -35,29 +34,44 @@ int CrossingArm::GetArmPosition() {
 
 // event for arm down in crossing
 void CrossingArm::ArmDown() {
-    if (!bellOn) {
+
+    if (pos < MAXARM ) {
+        armTimer.StartArmTimeIn();
+    }
+
+    if (bellOn == false && armTimer.ArmDelay()) {
+        Serial.println("bell on");
         bellPlayer.volume(BELLVOLUME);
         bellPlayer.enableLoopAll();
-        digitalWrite(FLASHER, HIGH);
         bellOn = true;
     }
+
+    digitalWrite(FLASHER, HIGH);
 
     if (pos < MAXARM) {
         pos = pos + ARMINCR;
         servo.write(pos);
+    } 
+    
+    if (pos == MAXARM) {
+        bellPlayer.disableLoopAll();
+        bellOn = false;
     }
 };
 
 // event for arm up in crossing
 void CrossingArm::ArmUp() {
-    if (bellOn && pos == MINARM+1) {
-        digitalWrite(FLASHER, LOW);
+    if (bellOn) {
         bellPlayer.disableLoopAll();
         bellOn = false;
     }
- 
+    
     if (pos > MINARM) {
         pos = pos - ARMINCR;    
         servo.write(pos);
+    } 
+    
+    if (pos == MINARM) {
+        digitalWrite(FLASHER, LOW);
     }
 };
