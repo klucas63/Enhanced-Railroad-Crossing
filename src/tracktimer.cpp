@@ -16,6 +16,7 @@ bool TrackTimer::CheckTrackTime() {
 
     if (lastCheckTrack_ms == 0) {
         lastCheckTrack_ms = current_ms;
+        bRetVal = true;
     }
 
     if ((current_ms > lastCheckTrack_ms + TIMEOUT)) {
